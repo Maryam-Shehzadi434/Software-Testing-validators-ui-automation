@@ -1,0 +1,32 @@
+ ============================= test session starts ==============================
+ platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.7.0 -- /usr/bin/python3
+ rootdir: /home/claude/validators_project/my_tests
+ configfile: pytest.ini
+ plugins: cov-7.1.0
+ collecting ... collected 14 items
+ 
+ test_advanced.py::test_r_ve_raises_validation_error PASSED               [  7%]
+ test_advanced.py::test_raised_error_carries_details FAILED               [ 14%]
+ test_advanced.py::test_valid_value_does_not_raise_even_in_raise_mode PASSED [ 21%]
+ test_advanced.py::test_between_with_min_greater_than_max_is_an_error PASSED [ 28%]
+ test_advanced.py::test_env_var_switches_on_raise_mode PASSED             [ 35%]
+ test_advanced.py::test_monkeypatch_replaces_hostname_check PASSED        [ 42%]
+ test_advanced.py::test_mock_verifies_hostname_is_called PASSED           [ 50%]
+ test_advanced.py::test_bulk_validation_from_file PASSED                  [ 57%]
+ test_advanced.py::test_registration_form PASSED                          [ 64%]
+ test_advanced.py::test_capsys_captures_print PASSED                      [ 71%]
+ test_advanced.py::test_validation_error_is_falsy_but_not_bool PASSED     [ 78%]
+ test_advanced.py::test_approx_with_between PASSED                        [ 85%]
+ test_advanced.py::test_runs_only_on_modern_python PASSED                 [ 92%]
+ test_advanced.py::test_stress_many_emails SKIPPED (set RUN_STRESS=1 ...) [100%]
+ 
+ =================================== FAILURES ===================================
+ ______________________ test_raised_error_carries_details _______________________
+ test_advanced.py:21: in test_raised_error_carries_details
+     assert info.value.function.__name__ == "between"
+            ^^^^^^^^^^^^^^^^^^^
+ E   AttributeError: 'ValidationError' object has no attribute 'function'
+ =========================== short test summary info ============================
+ SKIPPED [1] test_advanced.py:102: set RUN_STRESS=1 to run the 20,000-email stress test
+ FAILED test_advanced.py::test_raised_error_carries_details - AttributeError: ...
+ =================== 1 failed, 12 passed, 1 skipped in 0.07s ====================

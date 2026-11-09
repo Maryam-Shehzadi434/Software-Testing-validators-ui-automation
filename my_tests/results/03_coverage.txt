@@ -1,0 +1,19 @@
+.............s.........................................................s [ 86%]
+..........x                                                              [100%]
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.12.3-final-0 ________________
+
+Name                                                           Stmts   Miss Branch BrPart  Cover   Missing
+----------------------------------------------------------------------------------------------------------
+/home/claude/validators_project/src/validators/between.py         19      2      8      1    89%   66, 77
+/home/claude/validators_project/src/validators/domain.py          47     17     18      4    55%   25-28, 32-39, 95, 99, 112, 117, 134-135
+/home/claude/validators_project/src/validators/email.py           15      3      8      1    74%   68-72
+/home/claude/validators_project/src/validators/hostname.py        35      4     16      3    82%   38-40, 45->48, 124
+/home/claude/validators_project/src/validators/ip_address.py      34      3     16      3    88%   90, 135, 137
+/home/claude/validators_project/src/validators/length.py          10      2      4      2    71%   41, 43
+/home/claude/validators_project/src/validators/slug.py             6      0      0      0   100%
+/home/claude/validators_project/src/validators/url.py             55     17     20      2    64%   16, 76-85, 120-121, 151-154, 158, 241-242
+/home/claude/validators_project/src/validators/utils.py           36      1     10      1    96%   97
+----------------------------------------------------------------------------------------------------------
+TOTAL                                                            257     49    100     17    76%
+80 passed, 2 skipped, 1 xfailed in 0.31s

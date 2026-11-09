@@ -1,0 +1,16 @@
+[run]
+source = validators
+branch = True
+
+[report]
+include =
+    */validators/email.py
+    */validators/url.py
+    */validators/ip_address.py
+    */validators/between.py
+    */validators/length.py
+    */validators/slug.py
+    */validators/hostname.py
+    */validators/domain.py
+    */validators/utils.py
+show_missing = True
