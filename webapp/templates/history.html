@@ -1,0 +1,12 @@
+{% extends "app.html" %}{% block title %}History - Validators Hub{% endblock %}
+{% block content %}<div class="head"><h1>Validation history</h1><p>Search, filter and export your previous checks.</p></div>
+<div class="card"><form method="get" class="filters" data-testid="history-filter">
+<div><label for="q" style="margin-top:0">Search</label><input type="text" id="q" name="q" value="{{ q }}" data-testid="history-search"></div>
+<div><label for="status" style="margin-top:0">Status</label><select id="status" name="status" data-testid="history-status">
+{% for s in ['all','valid','invalid'] %}<option value="{{ s }}" {{ 'selected' if s == status }}>{{ s }}</option>{% endfor %}</select></div>
+<button type="submit" data-testid="history-apply">Apply</button></form>
+{% if rows %}<table data-testid="history-table"><thead><tr><th>Time</th><th>Type</th><th>Value</th><th>Result</th></tr></thead><tbody>
+{% for r in rows %}<tr data-testid="history-row"><td>{{ r.time }}</td><td>{{ r.kind }}</td><td class="mono">{{ r.value }}</td><td><span class="badge {{ 'valid' if r.valid else 'invalid' }}">{{ 'Valid' if r.valid else 'Invalid' }}</span></td></tr>{% endfor %}</tbody></table>
+{% else %}<p class="muted" data-testid="history-empty" style="margin-top:20px">No results found.</p>{% endif %}
+<div style="display:flex;gap:10px;margin-top:20px"><a class="btn ghost small" href="{{ url_for('export_history', q=q, status=status) }}" data-testid="history-export">Export CSV</a>
+<form method="post" action="{{ url_for('clear_history') }}"><button type="submit" class="ghost danger small" data-testid="history-clear">Clear history</button></form></div></div>{% endblock %}

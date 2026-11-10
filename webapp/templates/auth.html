@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block body %}{% from "mascot.html" import mascot %}
+<div class="auth"><section class="hero"><div class="brand"><b>Validators Hub</b></div>
+<div class="heroline">{{ mascot('happy', 150) }}<div class="bubble">Hi, I'm <b>Vali</b>! Give me anything and I'll tell you if it's valid.</div></div>
+<h2>Validate anything,<br><em>trust everything.</em></h2><p>Emails, URLs, IPs, hashes, cards and more, checked instantly with the open-source <b>validators</b> library.</p>
+<div class="float"><span class="dot y">✓</span><span class="mono">a@b.com</span> is a valid email</div>
+<div class="float"><span class="dot n">✕</span><span class="mono">256.1.1.1</span> is not an IPv4 address</div>
+<div class="float"><span class="dot y">✓</span><span class="mono">my-first-post</span> is a valid slug</div></section>
+<section class="formside"><div class="formbox">{% block form %}{% endblock %}</div></section></div>{% endblock %}

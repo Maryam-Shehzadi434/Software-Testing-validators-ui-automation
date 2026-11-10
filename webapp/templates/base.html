@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}Validators Hub{% endblock %}</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body><svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="vg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c8cf5"/><stop offset="1" stop-color="#ee9cc6"/></linearGradient></defs></svg>
+{% block body %}{% endblock %}
+<script>
+document.querySelectorAll("[data-fill]").forEach(function(b){b.addEventListener("click",function(){var i=document.getElementById("value");i.value=b.dataset.fill;i.focus()})});
+var pw=document.getElementById("password"),bar=document.getElementById("strength");
+if(pw&&bar){pw.addEventListener("input",function(){var v=pw.value,s=(v.length>=8)+(/\d/.test(v))+(/[A-Z]/.test(v))+(/[^\w]/.test(v));bar.style.width=s*25+"%";bar.style.background=["#fb7185","#fb7185","#f59e0b","#34d399","#34d399"][s]})}
+function burst(){var c=["#2dd4bf","#8b5cf6","#f472b6","#fbbf24","#34d399"];for(var i=0;i<46;i++){var e=document.createElement("i");e.className="confetti";e.style.left=Math.random()*100+"vw";e.style.background=c[i%5];e.style.animationDelay=Math.random()*.4+"s";e.style.transform="rotate("+Math.random()*360+"deg)";document.body.appendChild(e);setTimeout(function(x){return function(){x.remove()}}(e),2300)}}
+if(document.querySelector(".verdict.ok")||document.querySelector("[data-confetti]"))burst();
+var ks=document.getElementById("kind");
+if(ks&&window.META){ks.addEventListener("change",function(){var m=META[ks.value];document.getElementById("ex-good").dataset.fill=m.good;document.getElementById("ex-bad").dataset.fill=m.bad;document.getElementById("kind-desc").textContent=m.desc})}
+</script></body></html>

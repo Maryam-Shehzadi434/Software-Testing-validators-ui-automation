@@ -1,0 +1,17 @@
+{% extends "app.html" %}{% block title %}Validate - Validators Hub{% endblock %}
+{% block content %}{% from "mascot.html" import mascot %}<div class="head"><h1>Validation console</h1><p>Pick a validator, enter a value and get an instant verdict.</p></div>
+<div class="card">{% if error %}<div class="alert" data-testid="validate-error" role="alert">{{ error }}</div>{% endif %}
+<form method="post" data-testid="validate-form">
+<label for="kind">Validator</label><select id="kind" name="kind" data-testid="validate-kind">
+{% for cat, items in groups.items() %}<optgroup label="{{ cat }}">{% for r in items %}<option value="{{ r.name }}" {{ 'selected' if r.name == kind }}>{{ r.name }}</option>{% endfor %}</optgroup>{% endfor %}</select>
+<p class="muted" id="kind-desc" data-testid="validate-desc" style="margin:8px 0 0;font-size:14px">{{ meta[kind].desc }}</p>
+<label for="value">Value</label><input type="text" id="value" name="value" value="{{ value }}" data-testid="validate-value" class="mono" autocomplete="off">
+<div class="chips"><span class="muted" style="font-size:13px">Try an example:</span>
+<button type="button" class="chip good" id="ex-good" data-fill="{{ meta[kind].good }}" data-testid="example-valid">Valid sample</button>
+<button type="button" class="chip bad" id="ex-bad" data-fill="{{ meta[kind].bad }}" data-testid="example-invalid">Invalid sample</button></div>
+<button type="submit" data-testid="validate-submit">Validate</button></form>
+{% if result %}<div class="verdict {{ 'ok' if result.valid else 'bad' }}" data-testid="validate-result">{{ mascot('happy' if result.valid else 'sad', 96) }}
+<div><span class="badge {{ 'valid' if result.valid else 'invalid' }}" data-testid="validate-status">{{ 'Valid' if result.valid else 'Invalid' }}</span>
+<div style="margin-top:8px" data-testid="validate-summary">{{ result.value }} as {{ result.kind }}</div>
+<div class="muted" style="font-size:13px;margin-top:4px">validators.{{ result.kind }}(<code>"{{ result.value }}"</code>)</div></div></div>{% endif %}</div>
+<script>var META={{ meta|tojson }};</script>{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "app.html" %}{% block title %}Dashboard - Validators Hub{% endblock %}
+{% block content %}{% from "mascot.html" import mascot %}
+<div class="welcome"><div><h1 data-testid="dashboard-title">Welcome, {{ session.user }}</h1><p>Ready to validate? Vali is waiting. Here is your activity at a glance.</p>
+<a class="btn" style="background:#fff;color:#4c1d95;box-shadow:none" href="{{ url_for('validate') }}" data-testid="dash-validate">Validate something</a></div>{{ mascot('happy', 170) }}</div>
+<div class="grid g3" style="margin-top:20px"><div class="card stat t"><b data-testid="stat-total">{{ stats.total }}</b><span>Total checks</span></div>
+<div class="card stat"><b data-testid="stat-valid" style="color:var(--ok)">{{ stats.valid }}</b><span>Valid</span></div>
+<div class="card stat"><b data-testid="stat-invalid" style="color:var(--bad)">{{ stats.invalid }}</b><span>Invalid</span></div></div>
+<div class="grid g2" style="margin-top:18px">
+<div class="card"><h3>Pass rate</h3><div class="donut" style="--p:{{ stats.rate }};margin-top:18px"><i data-testid="stat-rate">{{ stats.rate }}%</i></div></div>
+<div class="card"><h3>Most used validators</h3>{% if top %}{% for k, n in top %}<div style="margin-top:14px;font-size:14px"><div class="item" style="border:0;padding:0"><span>{{ meta[k].label }}</span><b>{{ n }}</b></div><div class="bar"><i style="width:{{ (n*100/top[0][1])|round }}%"></i></div></div>{% endfor %}{% else %}<p class="muted" data-testid="dash-empty">Nothing yet. Run your first validation.</p>{% endif %}</div></div>
+<div class="card" style="margin-top:18px"><h3>Recent activity</h3>{% for r in recent %}<div class="item" data-testid="recent-row"><span class="mono">{{ r.value }}</span><span class="muted">{{ meta[r.kind].label }}</span><span class="badge {{ 'valid' if r.valid else 'invalid' }}">{{ 'Valid' if r.valid else 'Invalid' }}</span></div>{% else %}<p class="muted">No activity yet.</p>{% endfor %}
+<a class="btn ghost small" style="margin-top:16px" href="{{ url_for('history') }}" data-testid="dash-history">View history</a></div>{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "app.html" %}{% block title %}Catalog - Validators Hub{% endblock %}
+{% block content %}<div class="head"><h1>Validator catalog</h1><p>{{ total }} validators from the library. Search, filter and try any of them.</p></div>
+<form method="get" class="card filters" data-testid="catalog-filter">
+<div><label for="q" style="margin-top:0">Search</label><input type="text" id="q" name="q" value="{{ q }}" data-testid="catalog-search"></div>
+<div><label for="cat" style="margin-top:0">Category</label><select id="cat" name="cat" data-testid="catalog-category"><option value="all">all</option>
+{% for c in categories %}<option value="{{ c }}" {{ 'selected' if c == cat }}>{{ c }}</option>{% endfor %}</select></div>
+<button type="submit" data-testid="catalog-apply">Apply</button></form>
+{% if rows %}<div class="grid g4" style="margin-top:18px">{% for r in rows %}<div class="card" data-testid="catalog-card">
+<span class="tag">{{ r.cat }}</span><h3 style="margin-top:12px;font-size:19px">{{ r.label }}</h3><p class="muted" style="font-size:14px;min-height:42px">{{ r.desc }}</p>
+<code>{{ r.good }}</code><br><a class="btn ghost small" style="margin-top:14px" href="{{ url_for('validate', kind=r.name) }}" data-testid="catalog-try-{{ r.name }}">Try it</a></div>{% endfor %}</div>
+{% else %}<p class="muted" data-testid="catalog-empty" style="margin-top:24px">No validators match your search.</p>{% endif %}{% endblock %}

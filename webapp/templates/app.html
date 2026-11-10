@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% macro nav(ep, label, tid, icon) %}<a class="nav {{ 'on' if request.endpoint == ep }}" href="{{ url_for(ep) }}" data-testid="{{ tid }}"><span>{{ icon }}</span>{{ label }}</a>{% endmacro %}
+{% block body %}{% from "mascot.html" import mascot %}<div class="shell"><aside class="side" data-testid="navbar">
+<div class="brand">{{ mascot('happy', 42) }}<b>Validators Hub</b></div>
+{{ nav('dashboard','Dashboard','nav-dashboard','◧') }}{{ nav('validate','Validate','nav-validate','✓') }}
+{{ nav('catalog','Catalog','nav-catalog','▦') }}{{ nav('history','History','nav-history','☰') }}
+<div class="grow"></div><div class="who"><b data-testid="nav-user">{{ session.user }}</b>Signed in
+<div class="row"><a class="btn ghost small" href="{{ url_for('logout') }}" data-testid="nav-logout">Logout</a></div></div></aside>
+<main class="main">{% block content %}{% endblock %}</main></div>{% endblock %}

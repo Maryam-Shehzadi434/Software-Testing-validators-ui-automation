@@ -1,0 +1,5 @@
+{% extends "auth.html" %}{% block title %}Welcome - Validators Hub{% endblock %}
+{% block form %}{% from "mascot.html" import mascot %}<div style="text-align:center" data-confetti>{{ mascot('happy', 130) }}
+<h1 data-testid="reg-success-title" style="margin-top:6px">Account created</h1></div>
+<p data-testid="reg-success-message" style="text-align:center">Welcome, {{ name }}! Your username is <b data-testid="reg-success-username">{{ username }}</b> and your account for {{ email }} is ready.</p>
+<div style="text-align:center"><a class="btn" href="{{ url_for('login') }}" data-testid="reg-success-login">Go to login</a></div>{% endblock %}

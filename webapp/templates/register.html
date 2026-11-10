@@ -1,0 +1,15 @@
+{% extends "auth.html" %}{% block title %}Register - Validators Hub{% endblock %}
+{% macro err(f) %}{% if errors.get(f) %}<div class="error" data-testid="error-{{ f }}">{{ errors[f] }}</div>{% endif %}{% endmacro %}
+{% block form %}<h1>Create your account</h1><p>It takes less than a minute.</p>
+<form method="post" data-testid="register-form" novalidate>
+<label for="name">Full name</label><input type="text" id="name" name="name" value="{{ form.get('name','') }}" data-testid="reg-name">{{ err('name') }}
+<label for="username">Username</label><input type="text" id="username" name="username" value="{{ form.get('username','') }}" data-testid="reg-username" autocomplete="off">{{ err('username') }}
+<label for="email">Email</label><input type="text" id="email" name="email" value="{{ form.get('email','') }}" data-testid="reg-email">{{ err('email') }}
+<label for="password">Password</label><input type="password" id="password" name="password" data-testid="reg-password">
+<div class="strength"><i id="strength" data-testid="reg-strength"></i></div>{{ err('password') }}
+<label for="confirm">Confirm password</label><input type="password" id="confirm" name="confirm" data-testid="reg-confirm">{{ err('confirm') }}
+<label for="country">Country</label><select id="country" name="country" data-testid="reg-country"><option value="">Select...</option>
+{% for c in countries %}<option value="{{ c }}" {{ 'selected' if form.get('country') == c }}>{{ c }}</option>{% endfor %}</select>{{ err('country') }}
+<div class="check"><input type="checkbox" id="terms" name="terms" value="yes" {{ 'checked' if form.get('terms') }} data-testid="reg-terms"><label for="terms">I accept the terms</label></div>{{ err('terms') }}
+<button type="submit" data-testid="reg-submit" style="width:100%">Create account</button></form>
+<p class="muted">Already registered? <a href="{{ url_for('login') }}" data-testid="reg-login-link">Sign in</a></p>{% endblock %}
